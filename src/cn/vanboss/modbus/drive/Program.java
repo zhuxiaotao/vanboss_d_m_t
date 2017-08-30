@@ -2,7 +2,7 @@ package cn.vanboss.modbus.drive;
 import java.io.IOException;
 
 public class Program {
-
+	/*已上传至github上*/
 	public static void main(String[] args) throws IOException {
 		try {
 			//创建两个modbus数据交互线程
