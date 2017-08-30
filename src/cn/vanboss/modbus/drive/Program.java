@@ -3,6 +3,10 @@ import java.io.IOException;
 
 public class Program {
 	/*已上传至github上*/
+	/**modbus测试读写主程序
+	 * @param args
+	 * @throws IOException
+	 */
 	public static void main(String[] args) throws IOException {
 		try {
 			//创建两个modbus数据交互线程

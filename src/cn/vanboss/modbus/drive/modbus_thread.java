@@ -14,13 +14,13 @@ public class modbus_thread extends Thread {
 	public void run() {
 		// 给modbus驱动设置ip及id
 		@SuppressWarnings("unused")
-		MasterExample Master = new MasterExample(ipset, idset);
+		modbusMaster Master = new modbusMaster(ipset, idset);
 		while (true) {
 			try {
 				// AccessToModbus为读数据与写入数据的方法
 				//Master.AccessToModbus();
 				//modbus读取操作
-				String readModbusstr = Master.readModbus(1, 10);
+				String readModbusstr = Master.readModbus_FC02(1, 10);
 				System.out.println("读出数据为: "+readModbusstr);
 				//modbus写入操作
 				//make假数据操作
@@ -29,15 +29,19 @@ public class modbus_thread extends Thread {
 				String str = new String();
 				int nextInt=0;
 				StringBuffer sb = new StringBuffer();
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 8; i++) {
 					nextInt = random.nextInt(100);
-					sb.append(str.valueOf(nextInt)+"&");
+					sb.append(str.valueOf(nextInt)+"&"); 
 				}
 				//去除最后一个&
 				String substring = sb.toString().substring(0, sb.length()-1);
 				//执行modbus写入操作
-				Master.writeModbus(1,substring);
-				Thread.sleep(1000);
+				//Master.writeModbus_FC16(1,substring);
+				//执行写入bool操作00001开始
+				//Master.writeModbus_FC05(1,false);
+				/*执行写入10个bool值*/
+				Master.writeModbus_FC15(1, "true&");
+				Thread.sleep(100);
 			} catch (Exception e) {
 				System.out.println("modbus驱动线程异常" + e.getMessage());
 			}
